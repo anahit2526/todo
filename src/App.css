@@ -1,0 +1,59 @@
+ .to-do-list {
+  text-align: center;
+  margin-top: 100px;
+  margin: 20px;
+ }
+ ul {
+  padding: 0;
+ }
+ li {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 15px;
+  background-color: azure;
+  margin-bottom: 10px;
+  border: 3px solid gray;
+  display: flex;
+  justify-content: space-between;
+ }
+ .text {
+  flex: 1;
+ }
+ input {
+      padding: 10px 20px;
+    font-size: 1.7rem;
+ }
+button {
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-button {
+  background-color: rgb(54, 143, 54);
+  margin-left: 20px;
+}
+.delete-button {
+  background-color: rgb(197, 25, 25);
+}
+.edit-button {
+  background-color: rgb(133, 26, 175);
+}
+.move-button {
+  background-color: rgb(53, 169, 204);
+}
+.move-button, .delete-button {
+padding: 8px 12px;
+font-size: 20pxm;
+margin-left: 10px;
+}
+.taskInput[readonly] {
+  border: none;
+  background-color: transparent;
+}
+input {
+  color: black;
+}
