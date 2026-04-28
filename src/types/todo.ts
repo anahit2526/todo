@@ -9,3 +9,6 @@ export interface TodoProps {
   todo: ITodo
 }
 
+export interface TodoState {
+  todos:ITodo[];
+}

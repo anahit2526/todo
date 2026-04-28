@@ -1,5 +1,6 @@
 import "./App.css";
-import { CreateTodoForm, TodoList } from "./components";
+import CreateTodoForm from "./pages/todo/CreateTodoForm";
+import TodoList from "./pages/todo/TodoList";
 
 const App = () => {
   return (

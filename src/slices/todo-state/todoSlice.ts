@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { TodoState } from "./types";
+import type { TodoState } from "../../types/todo";
 
 
 

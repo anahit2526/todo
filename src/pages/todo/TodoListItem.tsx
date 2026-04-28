@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./../../App.css";
 import { useDispatch } from "react-redux";
 import type { TodoProps } from "../../types/todo";
-import { deleteTodo, editTodo } from "../../features/todo-state";
+import { deleteTodo, editTodo } from "../../slices/todo-state/todoSlice";
 
 
 const TodoListItem: React.FC<TodoProps> = ({ todo }) => {
