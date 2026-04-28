@@ -19,7 +19,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@slices/*":["src/slices/*"],
+      "@types/*":["src/types/*"],
+      "@store/*":["src/store/*"],
+      "@pages/*":["src/pages/*"]
+
+      
+
+    },
   },
   "include": ["src"]
 }
