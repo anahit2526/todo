@@ -3,7 +3,7 @@ import TodoListItem from './TodoListItem.tsx';
 import "./../../App.css";
 import { useSelector } from 'react-redux';
 import type { ITodo } from '../../types/todo.ts';
-import type { RootState } from '../../app/store.ts';
+import type { RootState } from '../../store/store.ts';
 
 
 
