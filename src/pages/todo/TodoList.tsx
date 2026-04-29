@@ -2,8 +2,8 @@ import React from 'react'
 import TodoListItem from './TodoListItem.tsx';
 import "@/App.css";
 import { useSelector } from 'react-redux';
-import type { ITodo } from '../../types/todo.ts';
-import type { RootState } from '@store/store.ts';
+import type { ITodo } from 'types/todo.ts';
+import type { RootState } from 'store/store.ts';
 
 
 
