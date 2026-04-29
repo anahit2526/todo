@@ -22,10 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["./src/*"],
-      "slices/*":["./src/store/slices/*"],
-      "types/*":["./src/types/*"],
-      "store/*":["./src/store/*"],
-      "pages/*":["./src/pages/*"]
+      "@slices/*":["./src/store/slices/*"],
+      "@pages/*":["./src/pages/*"],
+      "@store/*":["./src/store/*"],
+      "@my-types/*":["./src/types/*"],
     },
   },
   "include": ["src"]
