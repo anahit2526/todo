@@ -22,7 +22,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["./src/*"],
-      "slices/*":["./src/slices/*"],
+      "slices/*":["./src/store/slices/*"],
       "types/*":["./src/types/*"],
       "store/*":["./src/store/*"],
       "pages/*":["./src/pages/*"]
