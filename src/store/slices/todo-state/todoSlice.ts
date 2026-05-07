@@ -1,39 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { TodoState } from "types/todo";
+import type { ITodo } from "@my-types/todo";
 
-
-
-const initialState: TodoState = {
-  todos: [],
-};
+const initialState: ITodo[] = [];
 
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push({
-        id: new Date().toISOString(),
-        todo: action.payload,
-        readonly: true,
-        completed: true,
-      });
+      state.unshift(action.payload);
     },
     deleteTodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+      return state.filter((todo) => todo.id !== action.payload);
     },
     editTodo: (state, action) => {
-      const { id, todo } = action.payload;
-      const existingTodo = state.todos.find((todo) => todo.id === id);
-
+      const { id, title } = action.payload;
+      const existingTodo = state.find((todo) => todo.id === id);
       if (existingTodo) {
-        existingTodo.todo = todo;
+        existingTodo.title = title;
       }
+    },
+    setTodos: (state, action) => {
+      state.push(...action.payload);
     },
   },
 });
 
-export const { addTodo, deleteTodo, editTodo } =
-  todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, setTodos } = todoSlice.actions;
 
 export default todoSlice.reducer;

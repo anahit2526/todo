@@ -7,11 +7,14 @@ export default function CreateTodoForm() {
   const [todo, setTodo] = useState<string>("");
 
   const dispatch = useDispatch();
-
   const addTask = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (todo) {
-      dispatch(addTodo(todo));
+      dispatch(addTodo({
+        id: crypto.randomUUID(),
+        title: todo,
+        completed: false,
+      }));
       setTodo('')
     }
   }
