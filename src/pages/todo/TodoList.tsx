@@ -3,22 +3,20 @@ import TodoListItem from './TodoListItem.tsx';
 import "@/App.css";
 import { useDispatch, useSelector } from 'react-redux';
 import type { ITodo } from '@my-types/todo.ts';
-import type { RootState } from '@store/store.ts';
-import { useTodos } from '@/hooks/useTodos.ts';
-import { setTodos } from '@/store/slices/todo-state/todoSlice.ts';
+import type { AppDispatch, RootState } from '@store/store.ts';
+import { fetchTodos } from '@slices/todo-state/todoSlice.ts';
 
 
 
 const TodoList: React.FC = () => {
     const todos: ITodo[] = useSelector((state: RootState) => state.todo);
-    const { data, loading } = useTodos();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        if (data.length && todos.length === 0) {
-            dispatch(setTodos(data));
+        if (todos.length === 0) {
+            dispatch(fetchTodos());
         }
-    }, [data, dispatch])
+    }, [todos.length, dispatch])
     return (
         <div className="container">
             {todos?.map((t) => (
