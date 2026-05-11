@@ -14,15 +14,15 @@ export default function CreateTodoForm() {
     if (todo) {
       dispatch(
         addTodo({
-        id: crypto.randomUUID(),
-        title: todo,
-        completed: false,
-      })
-    );
+          id: crypto.randomUUID(),
+          title: todo,
+          completed: false,
+        })
+      );
       setTodo('')
     }
   }
-  
+
   return (
 
     <div>
