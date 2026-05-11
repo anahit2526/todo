@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import "@/App.css";
 import { useDispatch } from "react-redux";
 import { deleteTodo, editTodo } from "@slices/todo-state/todoSlice";
-import type { TodoProps } from "@my-types/todo";
+import type { ITodo } from "@/types/todo";
 
+type Props = {
+  todo: ITodo;
+};
+const TodoListItem = ({ todo }: Props) => {
 
-const TodoListItem: React.FC<TodoProps> = ({ todo }) => {
   const dispatch = useDispatch();
-
   const [isEditing, setIsEditing] = useState(false);
-  const [editValue, setEditValue] = useState(todo.todo);
+  const [editValue, setEditValue] = useState(todo.title);
 
   return (
     <li>
       <input
         className="taskInput"
-        value={isEditing ? editValue : todo.todo}
+        value={isEditing ? editValue : todo.title}
         readOnly={!isEditing}
         onChange={(e) => setEditValue(e.target.value)}
       />
@@ -23,7 +25,7 @@ const TodoListItem: React.FC<TodoProps> = ({ todo }) => {
       {isEditing ? (
         <button
           onClick={() => {
-            dispatch(editTodo({ id: todo.id, todo: editValue }));
+            dispatch(editTodo({ id: todo.id, title: editValue }));
             setIsEditing(false);
           }}
         >
@@ -33,7 +35,7 @@ const TodoListItem: React.FC<TodoProps> = ({ todo }) => {
         <button
           onClick={() => {
             setIsEditing(true);
-            setEditValue(todo.todo);
+            setEditValue(todo.title);
           }}
         >
           Edit

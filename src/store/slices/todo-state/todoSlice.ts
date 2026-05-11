@@ -1,39 +1,75 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { TodoState } from "types/todo";
+import { createSlice } from '@reduxjs/toolkit';
+import type { ITodo } from '@my-types/todo';
+import { API } from '@/api/axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-
+// const initialState: ITodo[] = [];
+interface TodoState {
+  todo: ITodo[];
+  loading: boolean;
+  error: string | null;
+}
 
 const initialState: TodoState = {
-  todos: [],
+  todo: [],
+  loading: false,
+  error: null
 };
 
+const fetchTodosFromAPI = async () => {
+  const response = await API.get('/todos');
+
+  return response.data;
+};
+
+export const fetchTodos = createAsyncThunk<
+  ITodo[],
+  void,
+  { rejectValue: string }
+>('todos/fetchAll', async (_, { rejectWithValue }) => {
+  try {
+    return await fetchTodosFromAPI();
+  } catch (error) {
+    return rejectWithValue('error');
+  }
+});
+
 export const todoSlice = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push({
-        id: new Date().toISOString(),
-        todo: action.payload,
-        readonly: true,
-        completed: true,
-      });
+      state.todo.unshift(action.payload);
     },
     deleteTodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+      state.todo = state.todo.filter((todo) => todo.id !== action.payload);
     },
     editTodo: (state, action) => {
-      const { id, todo } = action.payload;
-      const existingTodo = state.todos.find((todo) => todo.id === id);
-
+      const { id, title } = action.payload;
+      const existingTodo = state.todo.find((todo) => todo.id === id);
       if (existingTodo) {
-        existingTodo.todo = todo;
+        existingTodo.title = title;
       }
-    },
+    }
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.todo = action.payload;
+      })
+      .addCase(fetchTodos.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTodos.rejected, (state, action) => {
+        state.loading = false;
+        state.error =
+          action.payload || action.error.message || 'An error occurred';
+      });
+  }
 });
 
-export const { addTodo, deleteTodo, editTodo } =
-  todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
