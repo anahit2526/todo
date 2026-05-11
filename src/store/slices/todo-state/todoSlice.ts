@@ -3,14 +3,26 @@ import type { ITodo } from "@my-types/todo";
 import { API } from "@/api/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState: ITodo[] = [];
+// const initialState: ITodo[] = [];
+interface TodoState {
+    todo: ITodo[];
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: TodoState = {
+  todo: [],
+  loading: false,
+  error: null,
+};
+
 
 const fetchTodosFromAPI = async () => {
   const response = await API.get("/todos");
   return response.data;
 };
 
-export const fetchTodos = createAsyncThunk(
+export const fetchTodos = createAsyncThunk<ITodo[], void, { rejectValue: string }>(
   "todos/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
@@ -26,23 +38,35 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.unshift(action.payload);
+      state.todo.unshift(action.payload);
     },
     deleteTodo: (state, action) => {
-      return state.filter((todo) => todo.id !== action.payload);
+      state.todo =  state.todo.filter(
+        (todo) => todo.id !== action.payload
+      );
     },
     editTodo: (state, action) => {
       const { id, title } = action.payload;
-      const existingTodo = state.find((todo) => todo.id === id);
+      const existingTodo = state.todo.find((todo) => todo.id === id);
       if (existingTodo) {
         existingTodo.title = title;
       }
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchTodos.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder
+        .addCase(fetchTodos.fulfilled, (state,action) => {
+            state.loading = false;
+            state.todo = action.payload;
+        })
+        .addCase(fetchTodos.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+        })
+        .addCase(fetchTodos.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message || "An error occurred";
+        })
   },
 });
 

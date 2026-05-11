@@ -9,7 +9,7 @@ import { fetchTodos } from '@slices/todo-state/todoSlice.ts';
 
 
 const TodoList: React.FC = () => {
-    const todos: ITodo[] = useSelector((state: RootState) => state.todo);
+    const todos: ITodo[] = useSelector((state: RootState) => state.todo.todo);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
