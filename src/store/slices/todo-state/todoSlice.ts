@@ -19,6 +19,7 @@ const initialState: TodoState = {
 
 const fetchTodosFromAPI = async () => {
   const response = await API.get("/todos");
+
   return response.data;
 };
 
@@ -26,9 +27,13 @@ export const fetchTodos = createAsyncThunk<ITodo[], void, { rejectValue: string 
   "todos/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
+
       return await fetchTodosFromAPI();
+      
     } catch (error) {
+
       return rejectWithValue("error");
+
     }
   },
 );

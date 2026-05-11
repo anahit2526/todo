@@ -9,15 +9,18 @@ import { fetchTodos } from '@slices/todo-state/todoSlice.ts';
 
 
 const TodoList: React.FC = () => {
+
     const todos: ITodo[] = useSelector((state: RootState) => state.todo.todo);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        if (todos.length === 0) {
-            dispatch(fetchTodos());
-        }
+
+        dispatch(fetchTodos());
+
     }, [todos.length, dispatch])
+
     return (
+
         <div className="container">
             {todos?.map((t) => (
                 <TodoListItem key={t.id} todo={t} />

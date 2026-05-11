@@ -8,6 +8,7 @@ type Props = {
   todo: ITodo;
 };
 const TodoListItem = ({ todo }: Props) => {
+  
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(todo.title);
