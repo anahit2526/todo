@@ -1,0 +1,111 @@
+.container {
+  width: 100%;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.taskInput {
+  flex: 1;
+  border: 1px solid transparent;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #0f172a;
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.taskInput:read-only {
+  cursor: default;
+}
+.taskInput:focus {
+  background: #ffffff;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.15);
+}
+.taskInput:hover {
+  background: #f8fafc;
+}
+.todo-button {
+  border: none;
+  background: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 72px;
+  text-align: center;
+}
+
+.todo-button:hover {
+  background: #e5e7eb;
+}
+.todo-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 28px;
+}
+
+.todo-form input {
+  width: 320px;
+  padding: 12px 14px;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+.todo-form input:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.15);
+}
+.todo-form button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.todo-form button:hover {
+  background: #1e293b;
+}
+.app-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: #0f172a;
+}

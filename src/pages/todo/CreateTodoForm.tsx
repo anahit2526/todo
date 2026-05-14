@@ -26,8 +26,8 @@ export default function CreateTodoForm() {
   return (
 
     <div>
-      <h1>Todo List App</h1>
-      <form className="todoForm" onSubmit={addTask}>
+      <h1 className='app-title'>Todo List App</h1>
+      <form className="todo-form" onSubmit={addTask}>
         <input
           type="text"
           value={todo}

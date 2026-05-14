@@ -13,13 +13,15 @@ const TodoList: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchTodos());
-    }, [todos.length, dispatch])
+    }, [dispatch])
 
     return (
         <div className="container">
-            {todos?.map((t) => (
-                <TodoListItem key={t.id} todo={t} />
-            ))}
+            <ul className="todo-list">
+                {todos?.map((t) => (
+                    <TodoListItem key={t.id} todo={t} />
+                ))}
+            </ul>
         </div>
     )
 }

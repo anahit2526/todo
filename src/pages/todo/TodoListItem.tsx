@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { deleteTodo, editTodo } from "@slices/todo-state/todoSlice";
 import type { ITodo } from "@/types/todo";
 
+import './Todo.css'
+
 type Props = {
   todo: ITodo;
 };
@@ -14,7 +16,7 @@ const TodoListItem = ({ todo }: Props) => {
   const [editValue, setEditValue] = useState(todo.title);
 
   return (
-    <li>
+    <li className="todo-item">
       <input
         className="taskInput"
         value={isEditing ? editValue : todo.title}
@@ -24,6 +26,7 @@ const TodoListItem = ({ todo }: Props) => {
 
       {isEditing ? (
         <button
+          className="todo-button"
           onClick={() => {
             dispatch(editTodo({ id: todo.id, title: editValue }));
             setIsEditing(false);
@@ -33,6 +36,7 @@ const TodoListItem = ({ todo }: Props) => {
         </button>
       ) : (
         <button
+          className="todo-button"
           onClick={() => {
             setIsEditing(true);
             setEditValue(todo.title);
@@ -42,7 +46,9 @@ const TodoListItem = ({ todo }: Props) => {
         </button>
       )}
 
-      <button onClick={() => dispatch(deleteTodo(todo.id))}>
+      <button
+        className="todo-button"
+        onClick={() => dispatch(deleteTodo(todo.id))}>
         Delete
       </button>
     </li>
