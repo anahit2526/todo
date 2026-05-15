@@ -1,41 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createPosts, setBody, setTitle } from '@/store/slices/post-state/postSlice';
 import type { AppDispatch, RootState } from '@/store/store';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import './CreatePostForm.css'
+
 export default function CreatePostForm() {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const title = useSelector((state: RootState) => state.post.post.title);
-  const body = useSelector((state: RootState) => state.post.post.body);
-  const [createdPost, setCreatedPost] = useState<{
-    title: string;
-    body: string;
-  } | null>({
-    title: '',
-    body: ''
-  });
+  const title = useSelector((state: RootState) => state.post.title);
+  const body = useSelector((state: RootState) => state.post.body);
+  const posts = useSelector((state: RootState) => state.post.posts);
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
+    if (!title || !body) {
+      return;
+    }
     dispatch(
       createPosts({
-        post: {
-          title,
-          body
-        }
+        title,
+        body
       })
     );
-    setCreatedPost({
-      title,
-      body
-    })
   };
 
   return (
@@ -62,21 +54,17 @@ export default function CreatePostForm() {
             } />
         </label>
         <button type="submit">Create</button>
-        {createdPost && (
-          <div className="created-post">
-            <p>
-              <span>Title:</span> {createdPost.title}
-            </p>
-
-            <p>
-              <span>Body:</span> {createdPost.body}
-            </p>
-          </div>
-        )}
       </form>
+      {posts.map((post, i) => (
+        <div className="created-post" key={i}>
+          <p>
+            <span>Title:</span> {post.title}
+          </p>
+          <p>
+            <span>Body:</span> {post.body}
+          </p>
+        </div>
+      ))}
     </div>
   )
 }
-
-
-
