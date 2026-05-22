@@ -27,20 +27,19 @@ const initialState: PostState = {
   error: null
 };
 
-const callpost = async (post: CreatePostPayload) => {
+const createPostApi = async (post: CreatePostPayload) => {
   const response = await API.post('/posts', {
     title: post.title,
-    body: post.body,
-    userId: 1
+    body: post.body
   });
   return response.data;
 };
 
-export const createPosts = createAsyncThunk(
+export const createPost = createAsyncThunk(
   'post/createPost',
   async (post: CreatePostPayload, { rejectWithValue }) => {
     try {
-      return await callpost(post);
+      return await createPostApi(post);
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -51,27 +50,29 @@ export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    setTitle: (state, action) => {
-      state.title = action.payload;
-    },
-
-    setBody: (state, action) => {
-      state.body = action.payload;
+    updatePost: (state, action) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.posts[index] = action.payload;
+      }
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(createPosts.fulfilled, (state, action) => {
+      .addCase(createPost.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts.push(action.payload);
-        state.title = '';
-        state.body = '';
+        state.posts.push({
+          ...action.payload,
+          id: Date.now()
+        });
       })
-      .addCase(createPosts.pending, (state) => {
+      .addCase(createPost.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(createPosts.rejected, (state, action) => {
+      .addCase(createPost.rejected, (state, action) => {
         state.loading = false;
         state.error =
           (action.payload as string) ||
@@ -81,6 +82,6 @@ export const postSlice = createSlice({
   }
 });
 
-export const { setTitle, setBody } = postSlice.actions;
+export const { updatePost } = postSlice.actions;
 
 export default postSlice.reducer;

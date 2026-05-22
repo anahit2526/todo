@@ -43,33 +43,6 @@
 
   box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.15);
 }
-
-.post-form button {
-  height: 46px;
-
-  padding: 0 22px;
-
-  border: none;
-  border-radius: 14px;
-
-  background: #0f172a;
-  color: white;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.post-form button:hover {
-  background: #1e293b;
-
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
-}
 .created-post {
   width: 580px;
 
