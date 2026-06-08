@@ -1,0 +1,14 @@
+.created-post {
+  position: relative;
+  width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  background: white;
+  margin-bottom: 20px;
+}
+
+.edit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

@@ -1,14 +1,5 @@
 export interface ITodo {
   id: string;
-  todo: string;
-  readonly?: boolean;
+  title?: string;
   completed: boolean;
-}
-
-export interface TodoProps {
-  todo: ITodo
-}
-
-export interface TodoState {
-  todos:ITodo[];
 }
